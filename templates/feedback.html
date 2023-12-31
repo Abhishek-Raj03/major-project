@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Star Rating Form | CodingNepal</title>
+    <link rel="stylesheet" href="css/feedback.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <form class="feed" action="/feed" method="POST">
+      <div class="container">
+        <div class="post">
+          <div class="text">Thanks for rating us!</div>
+          <div class="edit">EDIT</div>
+        </div>
+        <div class="star-widget">
+          <input type="radio" name="rate" id="rate-5" value="5" />
+          <label for="rate-5" class="fas fa-star"></label>
+          <input type="radio" name="rate" id="rate-4" value="4" />
+          <label for="rate-4" class="fas fa-star"></label>
+          <input type="radio" name="rate" id="rate-3" value="3" />
+          <label for="rate-3" class="fas fa-star"></label>
+          <input type="radio" name="rate" id="rate-2" value="2" />
+          <label for="rate-2" class="fas fa-star"></label>
+          <input type="radio" name="rate" id="rate-1" value="1" />
+          <label for="rate-1" class="fas fa-star"></label>
+          <!-- <form action="#"> -->
+          <header></header>
+          <div class="textarea">
+            <textarea
+              cols="30"
+              placeholder="Describe your experience.."
+              name="review"
+            ></textarea>
+          </div>
+          <div class="btn">
+            <button type="submit">Post</button>
+          </div>
+          <!-- </form> -->
+        </div>
+      </div>
+      <!-- <input type="submit" /> -->
+    </form>
+    <div style="margin: -20vh 0 30vh 10vh; background-color: aquamarine; width: fit-content">
+        <strong>Total Rating: {{r}} </strong>
+    </div>
+
+
+    <div style="display: flex; flex-direction: column; margin: -20vh 60% 0 5vh; background-color: goldenrod; padding: 1.5%;">
+    {% for row in df %}
+     <div style="background-color: aliceblue; margin: 5px; padding: 2%;">
+       {{row[3]}}
+        <br>
+        <strong>-{{row[1]}}</strong>
+        <br>
+        <br>
+     </div>
+    {% endfor %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+id,name,username,password,age,gender,time,calorie_burnt
+1,Abhishek Raj,a@c.com,12345678,20,male,98,136.0
+2,Abhinav Raj,a@d.com,12345678,22,male,75,104.5
+3,Priya,a@e.com,12345678,22,female,42,67.0
+4,Aryan,a@f.com,12345678,21,male,147,128.5
+5,Ankit,a@g.com,12345678,21,male,113,157.0
+6,Sushmit,ps@gmail.com,12345678,21,male,92,116.0
