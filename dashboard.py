@@ -126,7 +126,7 @@ time_df1=df1[df1['name']==name]
 
 col1, col2 = st.columns((2))
 with col1:
-    st.subheader(f"Past 7 days calorie burnt Report of Sushmit")
+    st.subheader(f"Past 7 days calorie burnt Report of {name}")
     # print("-----------")
     # print(cal_df1['id'].get(3))
     fig = px.bar(cal_df1, x = "date", y = "calorie", text = ['{:,} cal'.format(x) for x in cal_df1["calorie"]],
@@ -134,7 +134,7 @@ with col1:
     st.plotly_chart(fig,use_container_width=True, height = 200)
 
 with col2:
-    st.subheader("Past 7 days time spend Report of Sushmit")
+    st.subheader(f"Past 7 days time spend Report of {name}")
     # st.write("##")
     # st.write("##")
     fig = px.bar(time_df1, x = "date", y = "time", text = ['{:,} min'.format(x) for x in time_df1["time"]],

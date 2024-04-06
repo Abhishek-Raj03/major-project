@@ -210,7 +210,7 @@ def main(id,ide):
         df.loc[ide,'calorie_burnt']=df.loc[ide,'calorie_burnt']+t*5 # if in 1min burn 5cal
         df.to_csv('users.csv',index=False)
         
-        id1=id+1
+        id1=ide+1
     row1=-1
     c=0
     with open('daily.csv') as o:
@@ -230,6 +230,6 @@ def main(id,ide):
         df1.to_csv('daily.csv',index=False)
     else:
         csv_writer=csv.writer(open('daily.csv','a',newline=""))
-        lis=[id1,df.loc[id,'name'],date.today(),t,t*5]
+        lis=[id1,df.loc[ide,'name'],date.today(),t,t*5]
         csv_writer.writerow(lis)
         
