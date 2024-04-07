@@ -36,6 +36,7 @@ import subprocess
 import threading
 import webbrowser
 import requests
+from speed import speed1
 # import id
 
 # id=id
@@ -202,6 +203,7 @@ def login():
                 # id=id+find_index(request.form.get('username'))
                 id1=find_index(request.form.get('username'))
                 session['id']=id1
+                # print(session.get('id'))
                 # localStorage
                 # id=id.MyClass(ide=id1)
                 # id.ide.id=id1
@@ -300,6 +302,11 @@ def squats():
     squats_fun(id)
     return redirect(url_for('gym'))
 
+@app.route('/speed')
+def speed():
+    speed1()
+    return redirect(url_for('features'))
+
 @app.route('/feedback')
 def feedback():
     # print("---------------------------")
@@ -347,11 +354,21 @@ def feed():
 def run_streamlit_server():
     # Replace 'your_streamlit_script.py' with the name of your Streamlit script
     subprocess.run(['python','-m','streamlit', 'run', 'dashboard.py'])
+
+def run_mailer_script():
+    print('------mailer------------------')
+    # Replace 'mailer.py' with the name of your mailer script
+    subprocess.Popen(['python','mailer.py'])
 @app.route('/start_streamlit')
 def start_streamlit():
     # Start Streamlit server in a separate thread
     streamlit_thread = threading.Thread(target=run_streamlit_server)
     streamlit_thread.start()
+    # subprocess.run(['python','-m','streamlit', 'run', 'dashboard.py'])
+
+    # mailer_thread = threading.Thread(target=run_mailer_script)
+    # mailer_thread.start()
+    # subprocess.run(['python','mailer.py'])
     # run_streamlit_server()
 
     # Open a new browser window or tab to the Streamlit app

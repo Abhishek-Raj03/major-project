@@ -7,7 +7,12 @@ import altair as alt
 import streamlit.components.v1 as com
 import json
 from streamlit_lottie import st_lottie
+import urllib.parse
 import requests
+from streamlit.components.v1 import html
+import webbrowser
+
+
 # <iframe src="https://lottie.host/embed/a2273076-8992-4c74-a349-4d0d40b1624a/xhKS86kIkH.json"></iframe>
 # <iframe src="https://lottie.host/embed/c1e4ea76-7beb-428d-ae94-c8ab019b24b4/Kug8BwWij8.json"></iframe>
 st.set_page_config(page_title="FitnessTracker!!!", page_icon=":bar_chart:",layout="wide")
@@ -149,9 +154,14 @@ with cl1:
     with st.expander(f"Download {name} Data"):
         st.write(cal_df1.style.background_gradient(cmap="Blues"))
         csv = cal_df1.to_csv(index = False).encode('utf-8')
-        st.download_button(f"Download now", data = csv, file_name = "time.csv", mime = "text/csv",
+        st.download_button(f"Download now", data = csv, file_name = "user_data.csv", mime = "text/csv",
                             help = 'Click here to download the data as a CSV file')
-        
+csv_data_encoded = urllib.parse.quote(cal_df1.to_csv(index=False))
+url = f'http://127.0.0.1:3000/?csv_data={csv_data_encoded}'
+
+def open_support_ticket():
+    webbrowser.open(url)
+st.button('Email Stats', on_click=open_support_ticket)
 
 st.subheader('Time Series Analysis of total calorie burnt by all users')
 cal_df2=df1.groupby(by=["date"],as_index=False)["calorie"].sum()
@@ -185,29 +195,29 @@ st.plotly_chart(fig3,use_container_width=True)
 # # st.line_chart(df6,x="date",y="calorie")
 # st.line_chart(df6)
 # Streamlit app
-st.title('Calorie Burnt Line Race Graph')
+# st.title('Calorie Burnt Line Race Graph')
 
-# Select unique users
-users = df1['name'].unique()
+# # Select unique users
+# users = df1['name'].unique()
 
-# Create a sidebar for user selection
-selected_user = st.sidebar.selectbox('Select User', users)
+# # Create a sidebar for user selection
+# selected_user = st.sidebar.selectbox('Select User', users)
 
-# Filter data for the selected user
-user_data = df1[df1['name'] == selected_user]
+# # Filter data for the selected user
+# user_data = df1[df1['name'] == selected_user]
 
-# Create line race graph
-fig = px.line(user_data, x='date', y='calorie', title=f'Calorie Burnt Line Race - {selected_user}',
-              labels={'calorie': 'Calorie Burnt', 'date': 'Date'})
+# # Create line race graph
+# fig = px.line(user_data, x='date', y='calorie', title=f'Calorie Burnt Line Race - {selected_user}',
+#               labels={'calorie': 'Calorie Burnt', 'date': 'Date'})
 
-# Add animation for line race effect
-fig.update_layout(updatemenus=[dict(type='buttons', showactive=False, buttons=[dict(label='Play',
-                                            method='animate', args=[None, dict(frame=dict(duration=500, redraw=True), fromcurrent=True)])])])
+# # Add animation for line race effect
+# fig.update_layout(updatemenus=[dict(type='buttons', showactive=False, buttons=[dict(label='Play',
+#                                             method='animate', args=[None, dict(frame=dict(duration=500, redraw=True), fromcurrent=True)])])])
 
-frames = [dict(data=[dict(type='scatter', mode='lines', x=user_data['date'][:i+1], y=user_data['calorie'][:i+1])],
-               traces=[0], name=f'Frame {i+1}') for i in range(len(user_data))]
+# frames = [dict(data=[dict(type='scatter', mode='lines', x=user_data['date'][:i+1], y=user_data['calorie'][:i+1])],
+#                traces=[0], name=f'Frame {i+1}') for i in range(len(user_data))]
 
-fig.frames = frames
+# fig.frames = frames
 
-# Show the line race graph
-st.plotly_chart(fig)
+# # Show the line race graph
+# st.plotly_chart(fig)
