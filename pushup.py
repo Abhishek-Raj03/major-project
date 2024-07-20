@@ -9,7 +9,7 @@ import pandas as pd
 import csv
 from datetime import date
 
-def push(id):
+def push(id_1):
     count=0
     position=None
     cap = cv2.VideoCapture(0)
@@ -76,13 +76,14 @@ def push(id):
     end=time.time()
     # print("-----------------------"+str(id)+"--------------------")
     df=pd.read_csv('users.csv')
-    id=int(id)
-    id=id-1
-    df.loc[id,'time']=df.loc[id,'time']+int((end-start)/60)
-    df.loc[id,'calorie_burnt']=df.loc[id,'calorie_burnt']+count*2 # for 1count 2cal burn
+    id_1=int(id_1)
+    id_1=id_1-1
+    # print(id)
+    df.loc[id_1,'time']=df.loc[id_1,'time']+int((end-start)/60)
+    df.loc[id_1,'calorie_burnt']=df.loc[id_1,'calorie_burnt']+count*2 # for 1count 2cal burn
     df.to_csv('users.csv',index=False)
 
-    id1=id+1
+    id1=id_1+1
     row1=-1
     c=0
     with open('daily.csv') as o:

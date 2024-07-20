@@ -264,7 +264,8 @@ def yogaMain():
     if form.validate_on_submit():
         file=form.file.data # grab the file
         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename))) # save the file
-        main(file.filename)
+        ide=session.get('id')
+        main(file.filename,ide)
         os.remove("static/video/"+file.filename)
         return redirect(url_for('yogaMain'))
     else:

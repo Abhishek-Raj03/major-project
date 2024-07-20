@@ -19,21 +19,12 @@ st.set_page_config(page_title="FitnessTracker!!!", page_icon=":bar_chart:",layou
 # com.iframe("https://lottie.host/embed/c1e4ea76-7beb-428d-ae94-c8ab019b24b4/Kug8BwWij8.json")
 image_path = "feelings.png"
 
-# Streamlit app
-# st.title("Streamlit with PNG Image")
 
 # Display the image
 col1, col2 = st.columns((2))
 with col1:
     st.title(" :bar_chart: Fitness Tracker")
     st.markdown('<style>div.block-container{padding-top:3rem;}</style>',unsafe_allow_html=True)
-    # category = 'fitness'
-    # api_url = 'https://api.api-ninjas.com/v1/quotes?category={}'.format(category)
-    # response = requests.get(api_url, headers={'X-Api-Key': 'eQTly/BTtC/bl6t3APTDSg==zGUXnjnEXYfOkAnI'})
-    # s = response.text
-    # data = json.loads(s)
-    # quote = data[0]['quote']
-    # author = data[0]['author']
     quote="I think exercise tests us in so many ways, our skills, our hearts, our ability to bounce back after setbacks. This is the inner beauty of sports and competition, and it can serve us all well as adult athletes."
     author="Peggy Fleming"
     st.markdown(f'<span>{quote}</span><br><span><strong>- {author}</strong></span>',unsafe_allow_html=True)
@@ -44,24 +35,11 @@ with col2:
         animation=json.load(source)
         st_lottie(animation,width=250,height=250)
 
-
-# fl = st.file_uploader(":file_folder: Upload a file",type=(["csv","txt","xlsx","xls"]))
-
-# if fl is not None:
-#     filename = fl.name
-#     st.write(filename)
-#     df = pd.read_csv(filename, encoding = "ISO-8859-1")
-# else:
-    # os.chdir(r"C:\Users\AEPAC\Desktop\Streamlit")
 df = pd.read_csv("users.csv", encoding = "ISO-8859-1")
 
 
 df1 = pd.read_csv("daily.csv", encoding = "ISO-8859-1")
 
-
-# with open('users.csv', 'r', newline='') as file:
-# print(df[df["name"].unique()==name])
-# print("----------------",name)
 
 
 
@@ -131,7 +109,7 @@ time_df1=df1[df1['name']==name]
 
 col1, col2 = st.columns((2))
 with col1:
-    st.subheader(f"Past 7 days calorie burnt Report of {name}")
+    st.subheader(f"Past 15 days calorie burnt Report of {name}")
     # print("-----------")
     # print(cal_df1['id'].get(3))
     fig = px.bar(cal_df1, x = "date", y = "calorie", text = ['{:,} cal'.format(x) for x in cal_df1["calorie"]],
@@ -139,7 +117,7 @@ with col1:
     st.plotly_chart(fig,use_container_width=True, height = 200)
 
 with col2:
-    st.subheader(f"Past 7 days time spend Report of {name}")
+    st.subheader(f"Past 15 days time spend Report of {name}")
     # st.write("##")
     # st.write("##")
     fig = px.bar(time_df1, x = "date", y = "time", text = ['{:,} min'.format(x) for x in time_df1["time"]],

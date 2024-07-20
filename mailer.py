@@ -45,7 +45,8 @@ def trigger_email():
     email_sender = 'testdevelopment25@gmail.com'
     email_receiver = '1ms20is004@gmail.com'
     subject = 'CSV File via Email'
-    body = 'Please find the attached CSV file.'
+    body = 'Please find the attached Fitness Report.'
+    # print(csv_data[0][0])
 
     # csv_data = [['Name', 'Age'],
     #             ['John', '25'],
@@ -68,7 +69,7 @@ def trigger_email():
     # Remove the uploaded CSV file after sending email
     os.remove('user_data.csv')
 
-    return "Email sent successfully!"
+    return "<h2>Email sent successfully!</h2>"
 
 if __name__ == "__main__":
     app.run(port=3000, debug=True)
